@@ -2,9 +2,8 @@
 namespace Feather2\Blade;
 
 use Feather2\Resource;
-use Illuminate\View\ViewServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\Support\Arr;
+use Illuminate\View\ViewServiceProvider;
 
 class ResourceProvider extends ViewServiceProvider{
     const COMPILER_PLUGINS_STR = 'blade_plugin_%s';
@@ -31,7 +30,14 @@ class ResourceProvider extends ViewServiceProvider{
 
         $this->app->singleton('blade.compiler', function ($app) {
             $cache = $app['config']['view.compiled'];
-            $compiler = new BladeCompiler($app['files'], $cache);
+                
+            //if blade compiler support directive, use it.
+            if (method_exists('Illuminate\\View\\Compilers\\BladeCompiler', 'directive')) {
+                $compiler = new BladeCompiler($app['files'], $cache);
+            } else {
+                //compatible
+                $compiler = new Compiler($app['files'], $cache);
+            }
 
             //load all plugins
             foreach ((array)$app['config']['view.paths'] as $dir) {
@@ -50,7 +56,7 @@ class ResourceProvider extends ViewServiceProvider{
             //extends statements
             // $compiler->extend(function ($value, $compiler) {
             //     return preg_replace_callback(self::COMPILER_REGEXP, function ($match) {
-            //         $callback = sprintf(self::COMPILER_PLUGINS_STRING, 'compiler', $match[1]);
+            //         $callback = sprintf(self::COMPILER_PLUGINS_STR, $match[1]);
                     
             //         if (function_exists($callback)) {
             //             $match[0] = $callback(Arr::get($match, 3));
