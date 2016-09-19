@@ -19,6 +19,11 @@ class ResourceProvider extends ViewServiceProvider{
         $this->app->singleton('feather.resource', function ($app) {
             $config = $app['config']['view'];
             $config['cacheDir'] = $config['compiled'] . '/feather';
+
+            if (!isset($config['cache'])) {
+                $config['cache'] = true;
+            }
+
             return new Resource\Resources($config['paths'], $config);
         });
     }
@@ -93,7 +98,7 @@ class ResourceProvider extends ViewServiceProvider{
             // view composers may be classes registered in the container, which allows
             // for great testable, flexible composers for the application developer.
             $env->setContainer($app);
-            
+
             //support our extensions
             if (isset($app['config']['view.suffix'])) {
                 $env->addExtension($app['config']['view.suffix'], 'blade');
