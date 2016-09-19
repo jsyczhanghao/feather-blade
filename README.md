@@ -2,6 +2,8 @@
 
 此包为[lothar](http://github.com/feather-team/lothar)环境运行时必要文件，支持blade及laravel版本为5.0+，同时更好的支持了插件机制及其他后缀。
 
+## 项目使用
+
 ### laravel
 
 安装
@@ -70,7 +72,7 @@ $container['config'] = $config;
 echo $blade->make($path, array(/*页面数据*/))->render();
 ```
 
-#### 插件开发及使用
+## 插件开发及使用
 
 直接在view目录下建立一个\_plugins\_目录即可
 ```
