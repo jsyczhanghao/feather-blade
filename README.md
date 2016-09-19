@@ -9,7 +9,6 @@
 安装
 ```sh
 composer require feather2/blade
-composer require feather2/resource  
 ```
 
 项目config/view.php配置
@@ -40,7 +39,6 @@ return [
 ```sh
 composer require jenssegers/blade
 composer require feather2/blade
-composer require feather2/resource  
 ```
 
 使用
@@ -85,7 +83,7 @@ echo $blade->make($path, array(/*页面数据*/))->render();
 
 view/\_plugins\_/datetime.php
 ```php
-function blade_datetime(){
+function blade_plugin_datetime(){
     return '<?php echo date("Y-m-d H:i:s");?>';
 }
 ```
