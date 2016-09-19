@@ -72,7 +72,7 @@ echo $blade->make($path, array(/*页面数据*/))->render();
 
 #### 插件开发及使用
 
-直接在view目录下建立一个_plugins_目录即可
+直接在view目录下建立一个\_plugins\_目录即可
 ```
 └── view
     └── _plugins_
@@ -81,7 +81,7 @@ echo $blade->make($path, array(/*页面数据*/))->render();
 
 插件的名字即为文件名
 
-view/_plugins_/datetime.php
+view/\_plugins\_/datetime.php
 ```php
 function blade_datetime(){
     return '<?php echo date("Y-m-d H:i:s");?>';
