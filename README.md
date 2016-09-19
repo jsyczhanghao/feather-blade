@@ -1,6 +1,6 @@
 # feather2-blade
 
-此包为[lothar](http://github.com/feather-team/lothar)环境运行时必要文件，支持blade及laravel版本为5.0+，同时更好的支持了插件机制。
+此包为[lothar](http://github.com/feather-team/lothar)环境运行时必要文件，支持blade及laravel版本为5.0+，同时更好的支持了插件机制及其他后缀。
 
 ### laravel
 
