@@ -1,6 +1,6 @@
 # feather2-blade
 
-此包为[lothar](http://github.com/feather-team/lothar)环境运行时必要文件，支持blade及laravel版本为5.0+，同时更好的支持了插件机制及其他后缀。
+此包为[lothar](http://github.com/feather-team/lothar)环境运行时必要文件，支持blade及laravel版本为5.0+，同时更好的支持了插件机制、任意后缀及自定义标签
 
 ## 项目使用
 
@@ -18,7 +18,12 @@ composer require feather2/blade
 return [
     'paths' => [],
     'compiled' => '缓存存放路径',
-    'suffix' => 'fuck'  //哪里喜欢点哪里
+    'suffix' => 'fuck',  //哪里喜欢点哪里，可不设置，lothar自带的engine.json指定即可
+    'tags' => [         //自定义标签
+        'raw' => ['{!!', '!!}'],
+        'content' => ['{{', '}}'],
+        'escapedContent' => ['{{{', '}}}']
+    ]
 ];
 ```
 
@@ -63,7 +68,6 @@ $config['view'] = [
     'paths' => $blade->viewPaths,
     'compiled' => $blade->cachePath
 ];
-$config['view.suffix'] = 'lala';
 $container['config'] = $config;
 
 (new BladeProvider\ResourceProvider($container))->register();
