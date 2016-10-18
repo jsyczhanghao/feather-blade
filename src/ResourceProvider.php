@@ -44,8 +44,24 @@ class ResourceProvider extends ViewServiceProvider{
                 $compiler = new Compiler($app['files'], $cache);
             }
 
+            $config = $app['config'];
+
+            //support tags settings
+            if (isset($config['view']['tags'])) {
+                $tags = (array)$config['view']['tags'];
+
+                foreach ($tags as $type => $delimiter) {
+                    $method = 'set'. ucfirst($type) . 'Tags';
+
+                    //filter
+                    if (method_exists($compiler, $method)) {
+                        $compiler->{$method}($delimiter[0], $delimiter[1]);
+                    }
+                }
+            }
+
             //load all plugins
-            foreach ((array)$app['config']['view.paths'] as $dir) {
+            foreach ((array)$config['view.paths'] as $dir) {
                 $files = glob($dir . '/_plugins_/**.php');
 
                 foreach ($files as $file) {
@@ -100,8 +116,8 @@ class ResourceProvider extends ViewServiceProvider{
             $env->setContainer($app);
 
             //support our extensions
-            if (isset($app['config']['view.suffix'])) {
-                $env->addExtension($app['config']['view.suffix'], 'blade');
+            if (isset($app['config']['view']['suffix'])) {
+                $env->addExtension($app['config']['view']['suffix'], 'blade');
             }
 
             //composer feather resource
