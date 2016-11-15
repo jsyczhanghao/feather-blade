@@ -117,7 +117,9 @@ class ResourceProvider extends ViewServiceProvider{
 
             //support our extensions
             if (isset($app['config']['view']['suffix'])) {
-                $env->addExtension($app['config']['view']['suffix'], 'blade');
+                foreach ((array)$app['config']['view']['suffix'] as $suffix) {
+                    $env->addExtension($suffix, 'blade');
+                }  
             }
 
             //composer feather resource
@@ -157,7 +159,7 @@ class ResourceProvider extends ViewServiceProvider{
 
             if (is_file($file)) {
                 $json = json_decode(file_get_contents($file), true);
-                $config['view'] = array_merge($config['view'], $json);
+                $config['view'] = array_merge_recursive($config['view'], $json);
                 break;
             }
         }
