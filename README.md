@@ -17,13 +17,7 @@ composer require feather2/blade
 <?php
 return [
     'paths' => [],
-    'compiled' => '缓存存放路径',
-    'suffix' => 'fuck',  //哪里喜欢点哪里，可不设置，lothar自带的engine.json指定即可
-    'tags' => [         //自定义标签
-        'raw' => ['{!!', '!!}'],
-        'content' => ['{{', '}}'],
-        'escapedContent' => ['{{{', '}}}']
-    ]
+    'compiled' => '缓存存放路径'
 ];
 ```
 
